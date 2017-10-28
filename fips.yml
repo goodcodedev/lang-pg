@@ -1,0 +1,7 @@
+#
+# Lang-pg
+#
+---
+imports:
+  lang-base:
+    git: https://github.com/goodcodedev/lang-base
