@@ -3,7 +3,11 @@ fips_begin_app(lang-pg cmdline)
     fips_files(lang-pg.cpp)
     fips_include_directories(gen)
     fips_dir(gen)
-    fips_files(TestLang.hpp TestLang.tab.cpp TestLang.yy.cpp TestLang.tab.h)
+    fips_files(
+        TestLang.hpp TestLang.tab.cpp 
+        TestLang.yy.cpp TestLang.tab.h
+        TestLangVisitor.hpp TestLangToSource.hpp
+    )
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPROJECT_ROOT=\\\"${FIPS_PROJECT_DIR}\\\"")
 fips_end_app()
 

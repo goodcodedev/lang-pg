@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
-extern FILE *yyin;
-extern int yyparse();
+enum NodeType {
+    ExpressionNode, FunctionNode, IdExprNode, IntExprNode
+};
 enum Type {
     INT, VOID
 };
@@ -13,26 +14,35 @@ static std::string enumTypeToString(Type item) {
     default: return "";
     }
 }
-class Expression {
+class AstNode {
 public:
+    NodeType nodeType;
+    AstNode(NodeType nodeType) : nodeType(nodeType) {}
+    virtual ~AstNode() {}
 };
-class Function {
+class Expression : public AstNode {
+public:
+    Expression(NodeType nodeType) : AstNode(nodeType) {}
+};
+class Function : public AstNode {
 public:
     std::vector<Expression*>* argExprs;
     std::string identifier;
-    Type lc_Type;
-    Function(Type lc_Type, std::string identifier, std::vector<Expression*>* argExprs) : argExprs(argExprs), identifier(identifier), lc_Type(lc_Type) {}
+    Type type;
+    Function(Type type, std::string identifier, std::vector<Expression*>* argExprs) : AstNode(FunctionNode), argExprs(argExprs), identifier(identifier), type(type) {}
 };
 class IdExpr : public Expression {
 public:
     std::string identifier;
-    IdExpr(std::string identifier) : identifier(identifier) {}
+    IdExpr(std::string identifier) : Expression(IdExprNode), identifier(identifier) {}
 };
 class IntExpr : public Expression {
 public:
     int intConst;
-    IntExpr(int intConst) : intConst(intConst) {}
+    IntExpr(int intConst) : Expression(IntExprNode), intConst(intConst) {}
 };
+extern FILE *yyin;
+extern int yyparse();
 extern Function* result;
 class Loader {
 public:

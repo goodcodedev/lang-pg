@@ -26,7 +26,7 @@ extern int yylineno;
 %%
 start: Function { result = reinterpret_cast<Function*>($1);$$ = result; }
     ;
-Function: Type identifier_T LPAREN_T argExprs RPAREN_T LBRACE_T RBRACE_T { $$ = new Function(static_cast<Type>($1), $2, reinterpret_cast<std::vector<Expression*>*>($4)); }
+Function: Type identifier_T LPAREN_T argExprs RPAREN_T LBRACE_T RBRACE_T { $$ = new Function(static_cast<Type>($1), $3, reinterpret_cast<std::vector<Expression*>*>($5)); }
     ;
 IntExpr: intConst_T { $$ = new IntExpr($1); }
     ;
