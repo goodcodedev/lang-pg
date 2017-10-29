@@ -40,26 +40,30 @@
       know about them.  */
    enum yytokentype {
      COMMA_T = 258,
-     INT_T = 259,
-     LBRACE_T = 260,
-     LPAREN_T = 261,
-     RBRACE_T = 262,
-     RPAREN_T = 263,
-     VOID_T = 264,
-     identifier_T = 265,
-     intConst_T = 266
+     EQUAL_T = 259,
+     INT_T = 260,
+     LBRACE_T = 261,
+     LPAREN_T = 262,
+     RBRACE_T = 263,
+     RPAREN_T = 264,
+     SEMICOLON_T = 265,
+     VOID_T = 266,
+     identifier_T = 267,
+     intConst_T = 268
    };
 #endif
 /* Tokens.  */
 #define COMMA_T 258
-#define INT_T 259
-#define LBRACE_T 260
-#define LPAREN_T 261
-#define RBRACE_T 262
-#define RPAREN_T 263
-#define VOID_T 264
-#define identifier_T 265
-#define intConst_T 266
+#define EQUAL_T 259
+#define INT_T 260
+#define LBRACE_T 261
+#define LPAREN_T 262
+#define RBRACE_T 263
+#define RPAREN_T 264
+#define SEMICOLON_T 265
+#define VOID_T 266
+#define identifier_T 267
+#define intConst_T 268
 
 
 
@@ -73,7 +77,7 @@ typedef union YYSTYPE
     int ival;
 }
 /* Line 1529 of yacc.c.  */
-#line 77 "/Users/gudmund/projects/lang-pg/code/gen/TestLang.tab.cpp"
+#line 81 "/Users/gudmund/projects/lang-pg/code/gen/TestLang.tab.cpp"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

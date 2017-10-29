@@ -3,6 +3,11 @@
 class TestLangToSource : public TestLangVisitor {
 public:
 std::string str;
+void visitAssign(Assign* node) {
+str += node->identifier;
+str += "=";
+visitExpression(node->expr);
+}
 void visitFunction(Function* node) {
 str += enumTypeToString(node->type);
 str += " ";
@@ -16,6 +21,10 @@ visitExpression(child);
 }
 str += ")";
 str += "{";
+for (Statement* child : *node->statements) {
+visitStatement(child);
+str += ";";
+}
 str += "}";
 }
 void visitIdExpr(IdExpr* node) {

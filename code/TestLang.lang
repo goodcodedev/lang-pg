@@ -3,10 +3,14 @@ enum Type {
     VOID "void",
     INT "int"
 }
-ast Function (Type WS identifier LPAREN argExprs RPAREN LBRACE RBRACE)
+ast Function (Type WS identifier LPAREN argExprs RPAREN LBRACE statements RBRACE)
 ast IntExpr (intConst)
 ast expr:Expression {
     IntExpr,
     IdExpr (identifier)
 }
 list argExprs COMMA expr
+ast Statement {
+    Assign (identifier EQUAL expr)
+}
+list statements Statement SEMICOLON

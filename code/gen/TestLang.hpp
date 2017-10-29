@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 enum NodeType {
-    ExpressionNode, FunctionNode, IdExprNode, IntExprNode
+    AssignNode, ExpressionNode, FunctionNode, IdExprNode, IntExprNode, StatementNode
 };
 enum Type {
     INT, VOID
@@ -20,6 +20,22 @@ public:
     AstNode(NodeType nodeType) : nodeType(nodeType) {}
     virtual ~AstNode() {}
 };
+class Assign;
+class Expression;
+class Function;
+class IdExpr;
+class IntExpr;
+class Statement;
+class Statement : public AstNode {
+public:
+    Statement(NodeType nodeType) : AstNode(nodeType) {}
+};
+class Assign : public Statement {
+public:
+    Expression* expr;
+    std::string identifier;
+    Assign(std::string identifier, Expression* expr) : Statement(AssignNode), expr(expr), identifier(identifier) {}
+};
 class Expression : public AstNode {
 public:
     Expression(NodeType nodeType) : AstNode(nodeType) {}
@@ -28,8 +44,9 @@ class Function : public AstNode {
 public:
     std::vector<Expression*>* argExprs;
     std::string identifier;
+    std::vector<Statement*>* statements;
     Type type;
-    Function(Type type, std::string identifier, std::vector<Expression*>* argExprs) : AstNode(FunctionNode), argExprs(argExprs), identifier(identifier), type(type) {}
+    Function(Type type, std::string identifier, std::vector<Expression*>* argExprs, std::vector<Statement*>* statements) : AstNode(FunctionNode), argExprs(argExprs), identifier(identifier), statements(statements), type(type) {}
 };
 class IdExpr : public Expression {
 public:
